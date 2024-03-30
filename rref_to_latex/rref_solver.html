@@ -4,66 +4,80 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Will Chartrand</title>
-  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="../style.css">
+
+    <script src="rref_solver.js"></script>
+
 </head>
 
-<body>
+<body onload="init()">
   <!-- Navbar -->
   <div style="width: 100%">
     <ul style="display: inline-flex">
-      <li><a href="index.html">Home</a></li>
-      <li><a href="about.html">About Me</a></li>
-      <li><a href="projects.html">Projects</a></li>
-      <li><a href="contact.html">Contact</a></li>
+      <li><a href="../index.html">Home</a></li>
+      <li><a href="../about.html">About Me</a></li>
+      <li><a href="../projects.html">Projects</a></li>
+      <li><a href="../contact.html">Contact</a></li>
     </ul>
   </div>
 
   <br><br>
 
-	<h2>Introduction</h2>
-
-	<br><br>
-
-
-	<div style="text-align: center">
-		<img src="assets/img/incar.jpg" style="width: 15%" alt=":)">
-	</div>
+	<h2>RREF to Latex Solver</h2>
 
 	<br><br>
 
 	<div style="padding-right: 100px; padding-left: 100px; text-align: center">
-			Hi my name is Will and this is one of my websites. I'm a third year computer science student in the cybersecurity stream. 
 
-			I've made this site specifically to be simple, without much in the way of newer, cpu-intensive technologies. If you would like to see my other more technical websites, you may find them below or in the projects section.
-	</div>
-
-  <br><br><br><br>
-
-	<h2>Other Sites</h2>
-
-  <div style="width: 100%; padding: 10px">
-
-    <br>
+			n x m matrix
+			<br>
+			<br>
+			n = &ensp;
+			<input style="width: 40px; height: 20px" type="number" value="3" name="" id="n"/>
+			<br>
+			m = &ensp;
+			<input style="width: 40px; height: 20px" type="number" value="3" name="" id="m"/>
 
 
-		<div style="width: 100%; text-align: center">
-				<div>
-					Will Chartrand
-					<br> 
-					<a href="http://willchartrand.netlify.app" target="_blank">willchartrand.netlify.app</a></li>
-				</div>
+		<br>
 
-				<br>
-				<br>
+		<div id="matrix_input">
+			<ul style="display: inline-flex" >
+				<li> <input class="matrix-entry-box" type="text" value="" name="" id=""/> </li>
+				<li> <input class="matrix-entry-box" type="text" value="" name="" id=""/> </li>
+				<li> <input class="matrix-entry-box" type="text" value="" name="" id=""/> </li>
+				<li> <input class="matrix-entry-box" type="text" value="" name="" id=""/> </li>
+			</ul>
+			<br>
+			<ul style="display: inline-flex">
+				<li> <input class="matrix-entry-box" type="text" value="" name="" id=""/> </li>
+				<li> <input class="matrix-entry-box" type="text" value="" name="" id=""/> </li>
+				<li> <input class="matrix-entry-box" type="text" value="" name="" id=""/> </li>
+				<li> <input class="matrix-entry-box" type="text" value="" name="" id=""/> </li>
+			</ul>
+			<ul style="display: inline-flex">
+				<li> <input class="matrix-entry-box" type="text" value="" name="" id=""/> </li>
+				<li> <input class="matrix-entry-box" type="text" value="" name="" id=""/> </li>
+				<li> <input class="matrix-entry-box" type="text" value="" name="" id=""/> </li>
+				<li> <input class="matrix-entry-box" type="text" value="" name="" id=""/> </li>
+			</ul>
 
-				<div>
-					Speed Clock Game
-					<br> 
-					<a href="https://clock-game.netlify.app/" target="_blank">clock-game.netlify.app</a></li>
-				</div>
+
 		</div>
 
-  </div>
+		<br>
+		<br>
+		<input type="submit" value="Submit" name="" id="matrix_submit"/>
+
+
+		<br>
+		<br>
+		<br>
+
+		<textarea name="" id="latex_output"></textarea>
+
+
+	</div>
 
   <br><br>
 </body>

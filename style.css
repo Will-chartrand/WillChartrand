@@ -19,3 +19,7 @@ h2 {
 	width: 100%;
 	text-align: center;
 }
+
+.matrix-entry-box {
+	width: 20px;
+}
