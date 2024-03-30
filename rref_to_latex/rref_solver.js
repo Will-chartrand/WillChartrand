@@ -111,7 +111,7 @@ function rref(matrix) {
 	for (let r = 0; r < rowCount; r++) {
 		if (columnCount <= lead) {
 			console.log(rrefLatex);
-			document.getElementById("latex_output").innerHTML = rrefLatex;
+			document.getElementById("latex_output").value = rrefLatex;
 			return;
 		}
 
@@ -124,7 +124,7 @@ function rref(matrix) {
 				lead++;
 				if (columnCount === lead) {
 					console.log(rrefLatex);
-					document.getElementById("latex_output").innerHTML = rrefLatex;
+					document.getElementById("latex_output").value = rrefLatex;
 					return;
 				}
 			}
@@ -168,12 +168,8 @@ function rref(matrix) {
 		lead++;
 	}
 	console.log(rrefLatex);
-	document.getElementById("latex_output").innerHTML = rrefLatex;
+	document.getElementById("latex_output").value = rrefLatex;
 }
-
-
-//rref(matrix);
-
 
 function update() {
     // Clear list
