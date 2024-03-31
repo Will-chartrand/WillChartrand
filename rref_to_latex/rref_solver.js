@@ -142,7 +142,7 @@ function rref(matrix) {
 		}
 
 		const divisor = matrix[r][lead];
-		if (divisor !== 0 && divisor !== 1) {
+		if (parseFloat(divisor.toFixed(2)) != 0 && parseFloat(divisor) != 1) {
 			rrefLatex += "$\\xrightarrow{" + ((Math.abs(divisor) == 1 ? parseFloat(divisor.toFixed(2)) : ("1/" + parseFloat(divisor.toFixed(2)))) + "R" + (r+1)) + "}$\n";
 			multiplyRow(matrix, r, 1 / divisor);
 			rrefLatex += printMatrix(matrix);
