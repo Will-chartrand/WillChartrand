@@ -1,6 +1,8 @@
 let global_matrix = [];
 let n = 3;
 let m = 3;
+let augmented = false;
+let augmentationIndex = -1;
 
 
 // ------------------------------------------
@@ -8,12 +10,30 @@ let m = 3;
 // ------------------------------------------
 
 function init() {
-	// Add onchange handler for 
+	// Add onchange and onclick handlers for interface
 	document.getElementById("n").onchange = updateMatrixDimensions;
 	document.getElementById("m").onchange = updateMatrixDimensions;
 	document.getElementById("matrix_submit").onclick = onMatrixSubmitted;
+	document.getElementById("augmented").onclick = updateAugmented;
+
 	generateMatrixHTML();
-	update();
+}
+
+
+function updateAugmented() {
+	augmented = document.getElementById("augmented").checked;
+	augmentationIndex = augmented ? n - 1 : -1
+
+	document.getElementById("augmentation").innerHTML = augmented ?
+		"<br> Augmentation line at: <input style=\"width: 40px; height: 20px\" onchange=\"updateAugmentationIndex()\" type=\"number\" value=\"" + augmentationIndex + "\" name=\"\" id=\"augmentationIndex\"/>"
+		:
+		"";
+	updateAugmentationIndex();
+}
+
+function updateAugmentationIndex() {
+	augmentationIndex = document.getElementById("augmentationIndex") ? document.getElementById("augmentationIndex").value : -1;
+	generateMatrixHTML();
 }
 
 function updateMatrixDimensions() {
@@ -28,6 +48,9 @@ function generateMatrixHTML() {
 	for(i = 0; i < m; i++) {
 		matrixHTML += "<ul style=\"display: inline-flex\">";
 		for(j = 0; j < n; j++) {
+			if(j == augmentationIndex) {
+				matrixHTML += "&ensp; | &ensp;"
+			}
 			matrixHTML += "<li> <input class=\"matrix-entry-box\" type=\"text\" value=\"" + (global_matrix.length == n ? global_matrix[i][j] : 0) + "\" name=\"\" id=\"a" + i.toString() + j.toString() + "\"/> </li>";
 		}
 		matrixHTML += "</ul>";
@@ -35,8 +58,6 @@ function generateMatrixHTML() {
 	}
 
 	document.getElementById("matrix_input").innerHTML = matrixHTML;
-
-	update();   // Refresh the list html
 }
 
 function onMatrixSubmitted() {
@@ -59,8 +80,6 @@ function updateMatrix() {
 		}
 		console.log(global_matrix[i]);
 	}
-
-	update();   // Refresh the list html
 }
 
 
@@ -97,9 +116,12 @@ function addRows(matrix, sourceRow, destRow, scalar) {
 
 function printMatrix(matrix) {
 	latexStr = "$\\begin{bmatrix}\n"
-	for(let row of matrix) {
-		for(let entry of row){
-			latexStr += parseFloat(entry.toFixed(2)) + " & ";
+	for(let i = 0; i < matrix.length; i++) {
+		for(let j = 0; j < matrix[i].length; j++){
+			if(j == augmentationIndex) {
+				latexStr += " & | & ";
+			}
+			latexStr += parseFloat(matrix[i][j].toFixed(2)) + " & ";
 		}
 		latexStr = latexStr.slice(0, -3) + " \\\\\n";
 	}
@@ -184,13 +206,6 @@ function rref(matrix) {
 	
 }
 
-function update() {
-    // Clear list
-    // document.getElementById("list").innerHTML = "";
-    // Add all elements of items back to the list
-    // for(let item in items) {
-        //document.getElementById("list").innerHTML += `<div id="${item}Div"><input type="checkbox" onchange="checkBox(this)" id="${item}">${item}</div>`;
-    // }
-}
+function update() { } // For future use
 
 
