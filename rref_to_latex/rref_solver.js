@@ -1,4 +1,4 @@
-let matrix = [];
+let global_matrix = [];
 let n = 3;
 let m = 3;
 
@@ -28,7 +28,7 @@ function generateMatrixHTML() {
 	for(i = 0; i < m; i++) {
 		matrixHTML += "<ul style=\"display: inline-flex\">";
 		for(j = 0; j < n; j++) {
-			matrixHTML += "<li> <input class=\"matrix-entry-box\" type=\"text\" value=\"0\" name=\"\" id=\"a" + i.toString() + j.toString() + "\"/> </li>";
+			matrixHTML += "<li> <input class=\"matrix-entry-box\" type=\"text\" value=\"" + (global_matrix.length == n ? global_matrix[i][j] : 0) + "\" name=\"\" id=\"a" + i.toString() + j.toString() + "\"/> </li>";
 		}
 		matrixHTML += "</ul>";
 		matrixHTML += "<br>";
@@ -41,21 +41,23 @@ function generateMatrixHTML() {
 
 function onMatrixSubmitted() {
 	updateMatrix();
-	rref(matrix)
+	global_matrix = rref(global_matrix);
+	console.log(global_matrix)
+	generateMatrixHTML();
 }
 
 
 function updateMatrix() {
-	matrix = []
+	global_matrix = []
 	console.log(document.getElementById("n").value);
 	console.log(document.getElementById("m").value);
 
-	for(i = 0; i < m; i++) {
-		matrix.push([])
-		for(j = 0; j < n; j++) {
-			matrix[i].push(parseInt(document.getElementById("a" + i.toString() + j.toString()).value));
+	for(let i = 0; i < m; i++) {
+		global_matrix.push([])
+		for(let j = 0; j < n; j++) {
+			global_matrix[i].push(parseInt(document.getElementById("a" + i.toString() + j.toString()).value));
 		}
-		console.log(matrix[i]);
+		console.log(global_matrix[i]);
 	}
 
 	update();   // Refresh the list html
@@ -65,6 +67,15 @@ function updateMatrix() {
 // ------------------------------------------
 // 	 RREF Code
 // ------------------------------------------
+
+function roundMatrix(matrix) {
+	for(let i = 0; i < matrix.length; i++) {
+		for(let j = 0; j < matrix[0].length; j++) {
+			matrix[i][j] = parseFloat(matrix[i][j].toFixed(2));
+		}
+	}
+	return matrix;
+}
 
 function swapRows(matrix, i, j) {
 	let temp = matrix[i];
@@ -112,7 +123,7 @@ function rref(matrix) {
 		if (columnCount <= lead) {
 			console.log(rrefLatex);
 			document.getElementById("latex_output").value = rrefLatex;
-			return;
+			return roundMatrix(matrix);
 		}
 
 		let i = r;
@@ -125,7 +136,7 @@ function rref(matrix) {
 				if (columnCount === lead) {
 					console.log(rrefLatex);
 					document.getElementById("latex_output").value = rrefLatex;
-					return;
+					return roundMatrix(matrix);
 				}
 			}
 		}
@@ -169,6 +180,8 @@ function rref(matrix) {
 	}
 	console.log(rrefLatex);
 	document.getElementById("latex_output").value = rrefLatex;
+	return roundMatrix(matrix);
+	
 }
 
 function update() {
